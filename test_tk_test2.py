@@ -29,21 +29,7 @@ class CH_s(tb.IsDescription):
     class picktimes(tb.IsDescription):
         pickt = tb.FloatCol()
         
-    class timefield(tb.IsDescription):
-        maxAmp_t = tb.FloatCol(pos = 0)
-        time_peak = tb.FloatCol(pos = 1)
-        Energy = tb.FloatCol(pos = 2)
-        ZeroCrossf = tb.FloatCol(pos = 3)
-        rise_time = tb.FloatCol(pos = 4)
-        RA = tb.FloatCol(pos = 5)
-    
-    class frefield(tb.IsDescription):
-        maxAmp_f = tb.FloatCol(pos = 0)
-        fre_peak = tb.FloatCol(pos = 1)
-        fre_centroid = tb.FloatCol(pos = 2)
-        fre_wpeak = tb.FloatCol(pos = 3)
-        Power = tb.FloatCol(pos = 4)
-        PartialPower = tb.FloatCol(shape = (5),pos = 5)        
+     
     
 class loc_s(tb.IsDescription):
     _v_pos = 1
