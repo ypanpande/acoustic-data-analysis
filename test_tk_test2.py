@@ -30,18 +30,6 @@ class CH_s(tb.IsDescription):
         pickt = tb.FloatCol()
         
      
-    
-class loc_s(tb.IsDescription):
-    _v_pos = 1
-    x = tb.FloatCol(pos = 0)
-    y = tb.FloatCol(pos = 1)
-    t0 = tb.FloatCol(pos = 2)
-    res = tb.FloatCol(pos = 3)
-    aver_res = tb.FloatCol(pos = 4)
-    
-    
-    
-    
 class Resultnested(tb.IsDescription):
     foldername = tb.StringCol(32, pos = 0)
     filename = tb.StringCol(32, pos = 1)
@@ -60,6 +48,18 @@ class Resultnested(tb.IsDescription):
     ch3 = CH_s()
     ch4 = CH_s()
     ch5 = CH_s()  
+    
+class loc_s(tb.IsDescription):
+    _v_pos = 1
+    x = tb.FloatCol(pos = 0)
+    y = tb.FloatCol(pos = 1)
+    t0 = tb.FloatCol(pos = 2)
+    res = tb.FloatCol(pos = 3)
+    aver_res = tb.FloatCol(pos = 4)
+    
+    
+    
+    
 
 
        
