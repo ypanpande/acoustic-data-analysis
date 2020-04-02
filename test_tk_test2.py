@@ -37,17 +37,11 @@ class Resultnested(tb.IsDescription):
     meastimeH = tb.StringCol(32, pos = 3)
     picktimearray = tb.FloatCol(shape = (6), pos = 4)
     shorttime_Ch = tb.UInt16Col(8, pos = 5)
-    shorttime_t = tb.FloatCol(pos = 6)
+    shorttime_t = tb.IQstatistic(pos = 6)
     loc_seq6s = loc_s()
     loc_geiger6s = loc_s()
     loc_seq4s = loc_s()
-    loc_geiger4s = loc_s()
-    ch0 = CH_s()
-    ch1 = CH_s()
-    ch2 = CH_s()
-    ch3 = CH_s()
-    ch4 = CH_s()
-    ch5 = CH_s()  
+
     
 class loc_s(tb.IsDescription):
     _v_pos = 1
