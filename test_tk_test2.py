@@ -30,17 +30,7 @@ class CH_s(tb.IsDescription):
         pickt = tb.FloatCol()
         
      
-class Resultnested(tb.IsDescription):
-    foldername = tb.StringCol(32, pos = 0)
-    filename = tb.StringCol(32, pos = 1)
-    meastimeD = tb.StringCol(32, pos = 2)
-    meastimeH = tb.StringCol(32, pos = 3)
-    picktimearray = tb.FloatCol(shape = (6), pos = 4)
-    shorttime_Ch = tb.UInt16Col(8, pos = 5)
-    shorttime_t = tb.IQstatistic(pos = 6)
-    loc_seq6s = loc_s()
-    loc_geiger6s = loc_s()
-    loc_seq4s = loc_s()
+_s()
 
     
 class loc_s(tb.IsDescription):
@@ -53,7 +43,17 @@ class loc_s(tb.IsDescription):
     
     
     
-    
+class Resultnested(tb.IsDescription):
+    foldername = tb.StringCol(32, pos = 0)
+    filename = tb.StringCol(32, pos = 1)
+    meastimeD = tb.StringCol(32, pos = 2)
+    meastimeH = tb.StringCol(32, pos = 3)
+    picktimearray = tb.FloatCol(shape = (6), pos = 4)
+    shorttime_Ch = tb.UInt16Col(8, pos = 5)
+    shorttime_t = tb.IQstatistic(pos = 6)
+    loc_seq6s = loc_s()
+    loc_geiger6s = loc_s()
+    loc_seq4s = loc    
 
 
        
