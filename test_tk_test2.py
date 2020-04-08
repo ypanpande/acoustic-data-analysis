@@ -68,18 +68,18 @@ class graphpanel:
         
         self.location_method = tk.StringVar()
         
+        self.heatmap_show_var = tk.BooleanVar()
+        self.hist_show_var = tk.BooleanVar()
+        self.timefield_show_var = tk.BooleanVar()
+        self.frefield_show_var = tk.BooleanVar()
+                
         self.x1 = tk.StringVar()
         self.x2 = tk.StringVar()
         self.y1 = tk.StringVar()
         self.y2 = tk.StringVar()
         
         self.time_interval_var = tk.StringVar()
-        
-        self.heatmap_show_var = tk.BooleanVar()
-        self.hist_show_var = tk.BooleanVar()
-        self.timefield_show_var = tk.BooleanVar()
-        self.frefield_show_var = tk.BooleanVar()
-        
+
         self.channel = tk.StringVar()
         
         self.timefield_var = tk.StringVar()
