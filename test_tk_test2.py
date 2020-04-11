@@ -92,6 +92,14 @@ class graphpanel:
         self.init_gui()
         
         
+
+    def init_gui(self):
+        self.create_top_settings_bar()
+        #self.create_right_settings_bar()
+        self.create_heatmap_bar()
+        self.create_hist_bar()
+        self.create_timefield_bar()
+        self.create_frefield_bar()
     def init_settings(self):
         self.init_setting = {
                 'start_time': '01012018',
@@ -106,15 +114,7 @@ class graphpanel:
                 'frefield':FREFIELD_PRAMETERS[0],
                 'channel':CH[0]
                 }
-        
-    def init_gui(self):
-        self.create_top_settings_bar()
-        #self.create_right_settings_bar()
-        self.create_heatmap_bar()
-        self.create_hist_bar()
-        self.create_timefield_bar()
-        self.create_frefield_bar()
-    
+            
     def create_top_settings_bar(self):
         topbar_frame = tk.Frame(self.root, height = 50 , width  = 780, relief = 'ridge', borderwidth = 1)
         topbar_frame.grid(row = 0, column = 0, rowspan = 10, columnspan= 25, 
