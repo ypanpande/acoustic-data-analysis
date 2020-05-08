@@ -119,12 +119,6 @@ class graphpanel:
         topbar_frame = tk.Frame(self.root, height = 50 , width  = 780, relief = 'ridge', borderwidth = 1)
         topbar_frame.grid(row = 0, column = 0, rowspan = 10, columnspan= 25, 
                      sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-        tk.Label(topbar_frame, text = 'Time Range:',font=("Helvetica", 11), bg = 'peach puff', relief = 'ridge', borderwidth = 1).grid(row = 1, column = 0, columnspan = 2, padx = 2, pady = 5)
-        
-        tk.Label(topbar_frame, text = 'From', font=("Helvetica", 10), fg = 'blue').grid(row = 4, column = 0, rowspan = 2, padx = 3, pady = 5)
-        combo_start_day = ttk.Combobox(topbar_frame, textvariable = self.start_time_day, value = DAY, width = 2, state = 'randonly')
-        combo_start_day.grid(row=4, column=1, rowspan = 2, padx = 3, pady = 5)
-        combo_start_day.current(0)
 
         
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
