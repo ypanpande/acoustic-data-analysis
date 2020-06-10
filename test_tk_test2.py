@@ -257,7 +257,6 @@ class graphpanel:
         combo3.current(0)
         combo3.bind('<<ComboboxSelected>>', self.set_frefield)
 
-#        self.frefield_var.set('--Frefield Not Selected--')
 #        ttk.OptionMenu(frefieldbar_frame, self.frefield_var, *FREFIELD_PRAMETERS).grid(row = 24, column = 16, columnspan = 2, padx = 1, pady = 2)
         self.frefield_frame = tk.Frame(frefieldbar_frame, height = 390, width = 750,relief = 'groove', borderwidth = 0.5)
         self.frefield_frame.grid(row = 25, column = 15, rowspan = 9, columnspan=10, 
