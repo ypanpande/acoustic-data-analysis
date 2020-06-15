@@ -250,11 +250,7 @@ class graphpanel:
         frefieldbar_frame.grid(row = 24, column = 15, rowspan = 10, columnspan=10, 
                      sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
         tk.Label(frefieldbar_frame, text = 'Hist frequency field', font=("Helvetica", 10), fg = 'blue').grid(row = 24, column = 15,  pady = 1)
-        ttk.Checkbutton(frefieldbar_frame, text = 'Show', variable = self.frefield_show_var, onvalue = 'true', offvalue = 'false', 
-                       command = self.frefield_show).grid(row = 24, column = 16,  pady = 1)
-        combo3 = ttk.Combobox(frefieldbar_frame, textvariable = self.frefield_var, value = FREFIELD_PRAMETERS, width = 25, state = 'randonly')
-        combo3.grid(row = 24, column = 17, columnspan = 3, padx = 1, pady = 2)
-        combo3.current(0)
+
         combo3.bind('<<ComboboxSelected>>', self.set_frefield)
 
 #        ttk.OptionMenu(frefieldbar_frame, self.frefield_var, *FREFIELD_PRAMETERS).grid(row = 24, column = 16, columnspan = 2, padx = 1, pady = 2)
