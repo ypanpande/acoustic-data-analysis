@@ -249,7 +249,6 @@ class graphpanel:
         frefieldbar_frame = tk.Frame(self.root, height = 450, width = 780, relief = 'ridge', borderwidth = 1)
         frefieldbar_frame.grid(row = 24, column = 15, rowspan = 10, columnspan=10, 
                      sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-        tk.Label(frefieldbar_frame, text = 'Hist frequency field', font=("Helvetica", 10), fg = 'blue').grid(row = 24, column = 15,  pady = 1)
 
         combo3.bind('<<ComboboxSelected>>', self.set_frefield)
 
