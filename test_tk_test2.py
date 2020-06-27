@@ -252,10 +252,7 @@ class graphpanel:
 
         combo3.bind('<<ComboboxSelected>>', self.set_frefield)
 
-#        ttk.OptionMenu(frefieldbar_frame, self.frefield_var, *FREFIELD_PRAMETERS).grid(row = 24, column = 16, columnspan = 2, padx = 1, pady = 2)
-        self.frefield_frame = tk.Frame(frefieldbar_frame, height = 390, width = 750,relief = 'groove', borderwidth = 0.5)
-        self.frefield_frame.grid(row = 25, column = 15, rowspan = 9, columnspan=10, 
-                     sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
+
 ###########reset subpanel state######################################################
     def reset_heatmap_state(self):
         if self.heatmap_show_var.get():
