@@ -40,6 +40,8 @@ class ScatterPlot:
         self.locy = self.data['y0 (mm)']
 
         return len(self.locx)
+    def plotdata(self):
+        plt.scatter(self.locx, self.locy,color='b', marker='o', alpha=.4)
     
     def plotsensor(self):
         plt.plot(self.sx2, self.sy2, color='g',linestyle = '--')
@@ -47,8 +49,6 @@ class ScatterPlot:
     def plotfield(self):
         plt.plot(self.rx2, self.ry2, color='r',linestyle = ':')
         
-    def plotdata(self):
-        plt.scatter(self.locx, self.locy,color='b', marker='o', alpha=.4)
 
         
     def showfigure(self):
