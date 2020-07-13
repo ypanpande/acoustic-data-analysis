@@ -31,6 +31,15 @@ class ScatterPlot:
         self.areabottom = areabottom
         self.block = block
         
+    def showfigure(self):
+        plt.figure()
+        plt.title('Location of event {}'.format(self.filename))
+        plt.xlabel('Horizontal (mm)')
+        plt.ylabel('Vertical (mm)')
+        plt.grid(True)
+        plt.xlim(-2000, 1200)
+        plt.ylim(-400, 2000)
+                
     def get_data(self):
         root = tk.Tk()
         root.withdraw()
@@ -50,16 +59,7 @@ class ScatterPlot:
         plt.plot(self.rx2, self.ry2, color='r',linestyle = ':')
         
 
-        
-    def showfigure(self):
-        plt.figure()
-        plt.title('Location of event {}'.format(self.filename))
-        plt.xlabel('Horizontal (mm)')
-        plt.ylabel('Vertical (mm)')
-        plt.grid(True)
-        plt.xlim(-2000, 1200)
-        plt.ylim(-400, 2000)
-        
+
     def scatter_plot(self):
         self.showfigure()
         self.plotsensor()
