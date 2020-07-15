@@ -55,9 +55,7 @@ class ScatterPlot:
     def plotsensor(self):
         plt.plot(self.sx2, self.sy2, color='g',linestyle = '--')
         
-    def plotfield(self):
-        plt.plot(self.rx2, self.ry2, color='r',linestyle = ':')
-        
+
 
 
     def scatter_plot(self):
