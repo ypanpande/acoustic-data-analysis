@@ -79,16 +79,16 @@ class ScatterPlot:
                 for dataloop in range(self.length_data()):
                     if x[0] <= self.locx[dataloop] < x[1]:
                         if y[0] <= self.locy[dataloop] < y[1]:
-                            self.count[mapx][mapy] +=1
-        
-        return self.count.T
-    
-    def blockcount2(self):
+     def blockcount2(self):
         hornum = int(np.round((self.areabottom[0] - self.areatop[0])/self.block))
         vernum = int(np.round((self.areatop[1] - self.areabottom[1])/self.block))
         self.mapcoordx = np.arange(self.areatop[0],self.areabottom[0]+self.block,self.block)
         self.mapcoordy = np.arange(self.areatop[1],self.areabottom[1]-self.block,-self.block)
+                                   self.count[mapx][mapy] +=1
         
+        return self.count.T
+    
+
         self.count = np.zeros((hornum,vernum))
         zsum = np.zeros((hornum,vernum))
         for mapx in range(hornum):
