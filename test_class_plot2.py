@@ -68,9 +68,7 @@ class ScatterPlot:
     def blockcount(self):
         hornum = int(np.round((self.areabottom[0] - self.areatop[0])/self.block))
         vernum = int(np.round((self.areatop[1] - self.areabottom[1])/self.block))
-        self.mapcoordx = np.arange(self.areatop[0],self.areabottom[0]+self.block,self.block)
-        self.mapcoordy = np.arange(self.areatop[1],self.areabottom[1]-self.block,-self.block)
-        
+
         self.count = np.zeros((hornum,vernum))
         for mapx in range(hornum):
             for mapy in range(vernum):
