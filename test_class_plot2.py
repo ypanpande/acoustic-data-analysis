@@ -87,9 +87,7 @@ class ScatterPlot:
         return self.count.T
     
 
-        self.count = np.zeros((hornum,vernum))
-        zsum = np.zeros((hornum,vernum))
-        for mapx in range(hornum):
+
             for mapy in range(vernum):
                 x = [self.mapcoordx[mapx], self.mapcoordx[mapx+1]]
                 y = [self.mapcoordy[mapy+1], self.mapcoordy[mapy]]
