@@ -107,12 +107,12 @@ class ScatterPlot:
         return np.array(self.mapcoordx[:-1])+int(self.block/2)
     def get_yticklabels(self):
         return np.array(self.mapcoordy[:-1])-int(self.block/2)
+
     def get_mask(self):
         masktemp = self.blockcount().copy()
         masktemp[masktemp >=1] = 2
         masktemp[masktemp ==0] = 1
-        masktemp[masktemp ==2] = 0
-        
+        masktemp[masktemp ==2] = 0        
         return masktemp
 #    def figure_plot(self, self.blockcount(),ax = None, self.get_xticklabels, self.get_yticklabels, self.get_mask):
 #        
