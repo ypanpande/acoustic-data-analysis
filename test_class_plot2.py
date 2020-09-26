@@ -122,12 +122,7 @@ class ScatterPlot:
         g.set_xlabel('Horizontal (mm)')   
         g.set_ylabel('Vertical (mm)') 
         g.set_title('Heatmap of event {}'.format(self.filename))
-        agx = [3.6, 20.2, 25,25.5,20.2,3.8,3.6]
-        agy = [4.5, 4.5, 5.1,19.1,20,20,4.5]
-        arx = [6, 29, 29 ,6,6]
-        ary = [7, 7, 17.9, 17.9,7]
-        g.plot(agx,agy,color='g',linestyle = '--')
-        g.plot(arx,ary, color='r',linestyle = ':')
+
 
     def plot_heatmap(self, f,ax, method = 'Loc', vmin = 0, vmax = 100, cmap = 'jet', 
                      linewidths = 0, sensor = True, cha = 'loc', aspect = 'count'):
