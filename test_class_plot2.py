@@ -127,9 +127,7 @@ class ScatterPlot:
     def plot_heatmap(self, f,ax, method = 'Loc', vmin = 0, vmax = 100, cmap = 'jet', 
                      linewidths = 0, sensor = True, cha = 'loc', aspect = 'count'):
         
-#        self.length_data()
-#        plt.figure()
-        
+
 #        ax = f.add_subplot(111)
         a = self.blockcount2()        
         
