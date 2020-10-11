@@ -134,13 +134,7 @@ class ScatterPlot:
         my_xticklabels = self.get_xticklabels()
         my_yticklabels = self.get_yticklabels()
         masktemp = self.get_mask()
-        #sns.palplot(sns.color_palette("jet", n_colors=256))  
-#        my_xticklabels = np.array(self.mapcoordx[:-1])+int(self.block/2)
-#        my_yticklabels = np.array(self.mapcoordy[:-1])-int(self.block/2)
-#        masktemp = self.count.T.copy()
-#        masktemp[masktemp >=1] = 2
-#        masktemp[masktemp ==0] = 1
-#        masktemp[masktemp ==2] = 0
+
                     
         self.g = sns.heatmap(a[aspect], vmin = vmin, vmax = vmax, annot = True, fmt = 'g', annot_kws={"size":8},
                              ax = ax, xticklabels = my_xticklabels, yticklabels = my_yticklabels,
