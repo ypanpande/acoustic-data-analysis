@@ -169,13 +169,7 @@ if __name__ == '__main__':
     print(type(locx))
     f, ax = plt.subplots(figsize = (7.4, 3.8), dpi = 100)
     p = ScatterPlot(filename, locx, locy)
-#    p.get_data()
-#    p.showfigure()
-#    p.plotsensor()
-#    p.plotfield()
-#    p.plotdata()
-#    p.length_data()
-#    p.blockcount()
+
     p.scatter_plot()
     p.plot_heatmap(f, ax)
     
