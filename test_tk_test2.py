@@ -29,9 +29,21 @@ class CH_s(tb.IsDescription):
     class picktimes(tb.IsDescription):
         pickt = tb.FloatCol()
         
-     
-_s()
-
+    class timefield(tb.IsDescription):
+        maxAmp_t = tb.FloatCol(pos = 0)
+        time_peak = tb.FloatCol(pos = 1)
+        Energy = tb.FloatCol(pos = 2)
+        ZeroCrossf = tb.FloatCol(pos = 3)
+        rise_time = tb.FloatCol(pos = 4)
+        RA = tb.FloatCol(pos = 5)
+    
+    class frefield(tb.IsDescription):
+        maxAmp_f = tb.FloatCol(pos = 0)
+        fre_peak = tb.FloatCol(pos = 1)
+        fre_centroid = tb.FloatCol(pos = 2)
+        fre_wpeak = tb.FloatCol(pos = 3)
+        Power = tb.FloatCol(pos = 4)
+        PartialPower = tb.FloatCol(shape = (5),pos = 5)        
     
 class loc_s(tb.IsDescription):
     _v_pos = 1
@@ -43,6 +55,7 @@ class loc_s(tb.IsDescription):
     
     
     
+    
 class Resultnested(tb.IsDescription):
     foldername = tb.StringCol(32, pos = 0)
     filename = tb.StringCol(32, pos = 1)
@@ -50,10 +63,17 @@ class Resultnested(tb.IsDescription):
     meastimeH = tb.StringCol(32, pos = 3)
     picktimearray = tb.FloatCol(shape = (6), pos = 4)
     shorttime_Ch = tb.UInt16Col(8, pos = 5)
-    shorttime_t = tb.IQstatistic(pos = 6)
+    shorttime_t = tb.FloatCol(pos = 6)
     loc_seq6s = loc_s()
     loc_geiger6s = loc_s()
-    loc_seq4s = loc    
+    loc_seq4s = loc_s()
+    loc_geiger4s = loc_s()
+    ch0 = CH_s()
+    ch1 = CH_s()
+    ch2 = CH_s()
+    ch3 = CH_s()
+    ch4 = CH_s()
+    ch5 = CH_s()  
 
 
        
@@ -68,18 +88,18 @@ class graphpanel:
         
         self.location_method = tk.StringVar()
         
-        self.heatmap_show_var = tk.BooleanVar()
-        self.hist_show_var = tk.BooleanVar()
-        self.timefield_show_var = tk.BooleanVar()
-        self.frefield_show_var = tk.BooleanVar()
-                
         self.x1 = tk.StringVar()
         self.x2 = tk.StringVar()
         self.y1 = tk.StringVar()
         self.y2 = tk.StringVar()
         
         self.time_interval_var = tk.StringVar()
-
+        
+        self.heatmap_show_var = tk.BooleanVar()
+        self.hist_show_var = tk.BooleanVar()
+        self.timefield_show_var = tk.BooleanVar()
+        self.frefield_show_var = tk.BooleanVar()
+        
         self.channel = tk.StringVar()
         
         self.timefield_var = tk.StringVar()
@@ -92,14 +112,6 @@ class graphpanel:
         self.init_gui()
         
         
-
-    def init_gui(self):
-        self.create_top_settings_bar()
-        #self.create_right_settings_bar()
-        self.create_heatmap_bar()
-        self.create_hist_bar()
-        self.create_timefield_bar()
-        self.create_frefield_bar()
     def init_settings(self):
         self.init_setting = {
                 'start_time': '01012018',
@@ -114,12 +126,33 @@ class graphpanel:
                 'frefield':FREFIELD_PRAMETERS[0],
                 'channel':CH[0]
                 }
-            
+        
+    def init_gui(self):
+        self.create_top_settings_bar()
+        #self.create_right_settings_bar()
+        self.create_heatmap_bar()
+        self.create_hist_bar()
+        self.create_timefield_bar()
+        self.create_frefield_bar()
+    
     def create_top_settings_bar(self):
         topbar_frame = tk.Frame(self.root, height = 50 , width  = 780, relief = 'ridge', borderwidth = 1)
         topbar_frame.grid(row = 0, column = 0, rowspan = 10, columnspan= 25, 
                      sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-
+        tk.Label(topbar_frame, text = 'Time Range:',font=("Helvetica", 11), bg = 'peach puff', relief = 'ridge', borderwidth = 1).grid(row = 1, column = 0, columnspan = 2, padx = 2, pady = 5)
+        
+        tk.Label(topbar_frame, text = 'From', font=("Helvetica", 10), fg = 'blue').grid(row = 4, column = 0, rowspan = 2, padx = 3, pady = 5)
+        combo_start_day = ttk.Combobox(topbar_frame, textvariable = self.start_time_day, value = DAY, width = 2, state = 'randonly')
+        combo_start_day.grid(row=4, column=1, rowspan = 2, padx = 3, pady = 5)
+        combo_start_day.current(0)
+        combo_start_day.bind('<<ComboboxSelected>>', self.start_time_day_changed)
+#        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
+#                textvariable=self.start_time_day, command=self.start_time_day_changed).grid(row=4, column=1, rowspan = 2, padx = 3, pady = 5)
+        combo_start_month = ttk.Combobox(topbar_frame, textvariable = self.start_time_month, value = MONTH, width = 2, state = 'randonly')
+        combo_start_month.grid(row=4, column=2, rowspan = 2, padx = 3, pady = 5)
+        combo_start_month.current(0)
+        combo_start_month.bind('<<ComboboxSelected>>', self.start_time_month_changed)
+        
         
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
 #                textvariable=self.start_time_month, command=self.start_time_month_changed).grid(row=4, column=2, rowspan = 2, padx = 3, pady = 5)
@@ -173,7 +206,13 @@ class graphpanel:
 #        rightbar_frame = tk.Frame(self.root, height = 50, relief = 'ridge', borderwidth = 1)
 #        rightbar_frame.grid(row = 0, column = 15, rowspan = 10, columnspan=10, 
 #                     sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-
+        ttk.Separator(topbar_frame, orient = 'vertical').grid(row = 0, column = 16, rowspan = 10, sticky = 'ns', padx = 20)
+        tk.Label(topbar_frame, text = 'Select Location Range(mm):', font=("Helvetica", 11), bg = 'peach puff', relief = 'ridge', borderwidth = 1).grid(row = 1, column = 17, columnspan = 5, padx = 2, pady = 5)
+        tk.Label(topbar_frame, text = 'x1', font=("Helvetica", 10), fg = 'blue').grid(row = 4, column = 17, padx = 1, pady = 1)
+        x1_entry = tk.Entry(topbar_frame, textvariable = self.x1, width = 8, validatecommand = self.x1_changed)
+        x1_entry.grid(row = 4, column = 18, padx = 2, pady = 2)
+        x1_entry.bind('<Return>', self.x1_changed)
+        
         tk.Label(topbar_frame, text = 'x2', font=("Helvetica", 10), fg = 'blue').grid(row = 5, column = 17, padx = 1, pady = 5)
         x2_entry = tk.Entry(topbar_frame, textvariable = self.x2, width = 8)
         x2_entry.grid(row = 5, column = 18, padx = 2, pady = 5)
@@ -249,10 +288,19 @@ class graphpanel:
         frefieldbar_frame = tk.Frame(self.root, height = 450, width = 780, relief = 'ridge', borderwidth = 1)
         frefieldbar_frame.grid(row = 24, column = 15, rowspan = 10, columnspan=10, 
                      sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-
+        tk.Label(frefieldbar_frame, text = 'Hist frequency field', font=("Helvetica", 10), fg = 'blue').grid(row = 24, column = 15,  pady = 1)
+        ttk.Checkbutton(frefieldbar_frame, text = 'Show', variable = self.frefield_show_var, onvalue = 'true', offvalue = 'false', 
+                       command = self.frefield_show).grid(row = 24, column = 16,  pady = 1)
+        combo3 = ttk.Combobox(frefieldbar_frame, textvariable = self.frefield_var, value = FREFIELD_PRAMETERS, width = 25, state = 'randonly')
+        combo3.grid(row = 24, column = 17, columnspan = 3, padx = 1, pady = 2)
+        combo3.current(0)
         combo3.bind('<<ComboboxSelected>>', self.set_frefield)
 
-
+#        self.frefield_var.set('--Frefield Not Selected--')
+#        ttk.OptionMenu(frefieldbar_frame, self.frefield_var, *FREFIELD_PRAMETERS).grid(row = 24, column = 16, columnspan = 2, padx = 1, pady = 2)
+        self.frefield_frame = tk.Frame(frefieldbar_frame, height = 390, width = 750,relief = 'groove', borderwidth = 0.5)
+        self.frefield_frame.grid(row = 25, column = 15, rowspan = 9, columnspan=10, 
+                     sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
 ###########reset subpanel state######################################################
     def reset_heatmap_state(self):
         if self.heatmap_show_var.get():

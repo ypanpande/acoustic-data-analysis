@@ -31,6 +31,32 @@ class ScatterPlot:
         self.areabottom = areabottom
         self.block = block
         
+    def get_data(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.filename = filedialog.askopenfilename()
+        self.data = pd.read_excel(self.filename)
+        self.locx = self.data['x0 (mm)']
+        self.locy = self.data['y0 (mm)']
+        
+    def get_data_direct(self, filename, x, y):
+        self.filename = filename
+        self.locx = x
+        self.locy = y
+    
+    def length_data(self):
+        return len(self.locx)
+    
+    def plotsensor(self):
+        plt.plot(self.sx2, self.sy2, color='g',linestyle = '--')
+        
+    def plotfield(self):
+        plt.plot(self.rx2, self.ry2, color='r',linestyle = ':')
+        
+    def plotdata(self):
+        plt.scatter(self.locx, self.locy,color='b', marker='o', alpha=.4)
+
+        
     def showfigure(self):
         plt.figure()
         plt.title('Location of event {}'.format(self.filename))
@@ -39,25 +65,7 @@ class ScatterPlot:
         plt.grid(True)
         plt.xlim(-2000, 1200)
         plt.ylim(-400, 2000)
-                
-    def get_data(self):
-        root = tk.Tk()
-        root.withdraw()
-        self.filename = filedialog.askopenfilename()
-        self.data = pd.read_excel(self.filename)
-        self.locx = self.data['x0 (mm)']
-        self.locy = self.data['y0 (mm)']
-
-        return len(self.locx)
-    def plotdata(self):
-        plt.scatter(self.locx, self.locy,color='b', marker='o', alpha=.4)
-    
-    def plotsensor(self):
-        plt.plot(self.sx2, self.sy2, color='g',linestyle = '--')
         
-
-
-
     def scatter_plot(self):
         self.showfigure()
         self.plotsensor()
@@ -68,7 +76,9 @@ class ScatterPlot:
     def blockcount(self):
         hornum = int(np.round((self.areabottom[0] - self.areatop[0])/self.block))
         vernum = int(np.round((self.areatop[1] - self.areabottom[1])/self.block))
-
+        self.mapcoordx = np.arange(self.areatop[0],self.areabottom[0]+self.block,self.block)
+        self.mapcoordy = np.arange(self.areatop[1],self.areabottom[1]-self.block,-self.block)
+        
         self.count = np.zeros((hornum,vernum))
         for mapx in range(hornum):
             for mapy in range(vernum):
@@ -77,17 +87,19 @@ class ScatterPlot:
                 for dataloop in range(self.length_data()):
                     if x[0] <= self.locx[dataloop] < x[1]:
                         if y[0] <= self.locy[dataloop] < y[1]:
-     def blockcount2(self):
+                            self.count[mapx][mapy] +=1
+        
+        return self.count.T
+    
+    def blockcount2(self):
         hornum = int(np.round((self.areabottom[0] - self.areatop[0])/self.block))
         vernum = int(np.round((self.areatop[1] - self.areabottom[1])/self.block))
         self.mapcoordx = np.arange(self.areatop[0],self.areabottom[0]+self.block,self.block)
         self.mapcoordy = np.arange(self.areatop[1],self.areabottom[1]-self.block,-self.block)
-                                   self.count[mapx][mapy] +=1
         
-        return self.count.T
-    
-
-
+        self.count = np.zeros((hornum,vernum))
+        zsum = np.zeros((hornum,vernum))
+        for mapx in range(hornum):
             for mapy in range(vernum):
                 x = [self.mapcoordx[mapx], self.mapcoordx[mapx+1]]
                 y = [self.mapcoordy[mapy+1], self.mapcoordy[mapy]]
@@ -107,12 +119,12 @@ class ScatterPlot:
         return np.array(self.mapcoordx[:-1])+int(self.block/2)
     def get_yticklabels(self):
         return np.array(self.mapcoordy[:-1])-int(self.block/2)
-
     def get_mask(self):
         masktemp = self.blockcount().copy()
         masktemp[masktemp >=1] = 2
         masktemp[masktemp ==0] = 1
-        masktemp[masktemp ==2] = 0        
+        masktemp[masktemp ==2] = 0
+        
         return masktemp
 #    def figure_plot(self, self.blockcount(),ax = None, self.get_xticklabels, self.get_yticklabels, self.get_mask):
 #        
@@ -122,19 +134,32 @@ class ScatterPlot:
         g.set_xlabel('Horizontal (mm)')   
         g.set_ylabel('Vertical (mm)') 
         g.set_title('Heatmap of event {}'.format(self.filename))
-
+        agx = [3.6, 20.2, 25,25.5,20.2,3.8,3.6]
+        agy = [4.5, 4.5, 5.1,19.1,20,20,4.5]
+        arx = [6, 29, 29 ,6,6]
+        ary = [7, 7, 17.9, 17.9,7]
+        g.plot(agx,agy,color='g',linestyle = '--')
+        g.plot(arx,ary, color='r',linestyle = ':')
 
     def plot_heatmap(self, f,ax, method = 'Loc', vmin = 0, vmax = 100, cmap = 'jet', 
                      linewidths = 0, sensor = True, cha = 'loc', aspect = 'count'):
         
-
+#        self.length_data()
+#        plt.figure()
+        
 #        ax = f.add_subplot(111)
         a = self.blockcount2()        
         
         my_xticklabels = self.get_xticklabels()
         my_yticklabels = self.get_yticklabels()
         masktemp = self.get_mask()
-
+        #sns.palplot(sns.color_palette("jet", n_colors=256))  
+#        my_xticklabels = np.array(self.mapcoordx[:-1])+int(self.block/2)
+#        my_yticklabels = np.array(self.mapcoordy[:-1])-int(self.block/2)
+#        masktemp = self.count.T.copy()
+#        masktemp[masktemp >=1] = 2
+#        masktemp[masktemp ==0] = 1
+#        masktemp[masktemp ==2] = 0
                     
         self.g = sns.heatmap(a[aspect], vmin = vmin, vmax = vmax, annot = True, fmt = 'g', annot_kws={"size":8},
                              ax = ax, xticklabels = my_xticklabels, yticklabels = my_yticklabels,
@@ -169,7 +194,13 @@ if __name__ == '__main__':
     print(type(locx))
     f, ax = plt.subplots(figsize = (7.4, 3.8), dpi = 100)
     p = ScatterPlot(filename, locx, locy)
-
+#    p.get_data()
+#    p.showfigure()
+#    p.plotsensor()
+#    p.plotfield()
+#    p.plotdata()
+#    p.length_data()
+#    p.blockcount()
     p.scatter_plot()
     p.plot_heatmap(f, ax)
     
