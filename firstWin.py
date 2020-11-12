@@ -45,11 +45,7 @@ class FirstWin:
         accemenu = tk.Menu(menubar, tearoff = 0)
         accemenu.add_command(label = 'Acceleration', command = self.acceleration)
         menubar.add_cascade(label = 'Acceleration', menu = accemenu)        
-        charmenu = tk.Menu(menubar, tearoff = 0)
-        charmenu.add_command(label = 'Time Field', command = self.time_field)
-        charmenu.add_command(label = 'Freq Field', command = self.freq_field)
-        menubar.add_cascade(label = 'Character', menu = charmenu)
-        
+
 
 
         firstchmenu = tk.Menu(menubar, tearoff = 0)
@@ -61,7 +57,11 @@ class FirstWin:
         helpmenu.add_command(label="Help", command=self.help_box)
         menubar.add_cascade(label="Help", menu=helpmenu)        
         self.root.config(menu = menubar)
-        
+        charmenu = tk.Menu(menubar, tearoff = 0)
+        charmenu.add_command(label = 'Time Field', command = self.time_field)
+        charmenu.add_command(label = 'Freq Field', command = self.freq_field)
+        menubar.add_cascade(label = 'Character', menu = charmenu)
+                
         
         bsource = ttk.Button(self.root, text = "h5 file", command = self.choose_h5_file)
         bsource.place(x = 100, y = 100, width = 90, height = 30)		
