@@ -42,15 +42,15 @@ class FirstWin:
         locmenu.add_separator()
         locmenu.add_command(label = 'All Methods', command = self.loc_all_methods)
         menubar.add_cascade(label = 'Location', menu = locmenu)
-        
+        accemenu = tk.Menu(menubar, tearoff = 0)
+        accemenu.add_command(label = 'Acceleration', command = self.acceleration)
+        menubar.add_cascade(label = 'Acceleration', menu = accemenu)        
         charmenu = tk.Menu(menubar, tearoff = 0)
         charmenu.add_command(label = 'Time Field', command = self.time_field)
         charmenu.add_command(label = 'Freq Field', command = self.freq_field)
         menubar.add_cascade(label = 'Character', menu = charmenu)
         
-        accemenu = tk.Menu(menubar, tearoff = 0)
-        accemenu.add_command(label = 'Acceleration', command = self.acceleration)
-        menubar.add_cascade(label = 'Acceleration', menu = accemenu)
+
 
         firstchmenu = tk.Menu(menubar, tearoff = 0)
         firstchmenu.add_command(label = 'First Channel', command = self.firstchannel)
