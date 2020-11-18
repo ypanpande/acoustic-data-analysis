@@ -68,14 +68,14 @@ class FirstWin:
 
         self.lsource = ttk.Label(self.root, text = self.default_source_file, background = "white")
         self.lsource.place(x = 200, y = 100, width = 300, height = 30)
-
-        binfo = ttk.Button(self.root, text = "h5 info", command = self.h5_info_date)
-        binfo.place(x = 100, y = 140, width = 90, height = 30)		
-        
-        ttk.Label(self.root, text = "date number:").place(x = 100, y = 220,  width = 120, height = 30)		
+        ttk.Label(self.root, text = "date number:").place(x = 100, y = 220,  width = 120, height = 30)      
         ttk.Radiobutton(self.root, text = 'one day', variable = self.dayVar, value = 1, command = self.choose_date).place(x = 230, y = 220,  width = 100, height = 30)
         ttk.Radiobutton(self.root, text = 'more days', variable = self.dayVar, value = 2, command = self.choose_date).place(x = 340, y = 220,  width = 100, height = 30)
         
+        binfo = ttk.Button(self.root, text = "h5 info", command = self.h5_info_date)
+        binfo.place(x = 100, y = 140, width = 90, height = 30)		
+        
+
         self.calchoose1 = ttk.Button(self.root, text = 'choose begin date', command = self.choose_first_date, state = 'disabled')
         self.calchoose1.place(x = 100, y = 260, width = 120, height = 30)
         self.calget1 = ttk.Button(self.root, text = 'show', command = self.get_first_date, state = 'disabled')
