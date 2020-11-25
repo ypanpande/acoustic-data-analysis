@@ -89,9 +89,6 @@ class FirstWin:
         self.calget2 = ttk.Button(self.root, text = 'show', command = self.get_end_date, state = 'disabled')
         self.calget2.place(x = 230, y = 300, width = 50, height = 30)
                
-        self.cal2 = ttk.Label(self.root, text = 'year-month-day', background = "white", state = 'disabled')
-        self.cal2.place(x = 290, y = 300, width = 100, height = 30)
-        
         self.bdata = ttk.Button(self.root, text = 'get data', command = self.get_data, state = 'disabled')
         self.bdata.place(x = 100, y = 360, width = 120, height = 30)
         self.combo_list = ttk.Combobox(self.root, value = self.tttlist, width = 100, state = 'disabled')
