@@ -104,9 +104,7 @@ class FirstWin:
         self.lsource.config(text = self.default_source_file)
 
     def h5_info_date(self):
-        h5infowin = tk.Toplevel(self.root)
-        h5infowin.geometry('250x250+30+30')
-        h5infowin.title('h5 file tables info')
+
         
         h5info = scrolledtext.ScrolledText(master = h5infowin, wrap =tk.WORD, font=("Helvetica", 10), state = 'disabled')
         h5info.pack()                                            
