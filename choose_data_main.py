@@ -126,14 +126,6 @@ class FirstWin:
 
         h5info.config(state='normal')
         h5info.delete(1.0, 'end')
-        try:
-            with tb.open_file(self.default_source_file, 'r') as h5file:
-                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
-                    h5info.insert('{}.0'.format(k+1), 'Name:  ' +
-                                  v.name+'        '+'Rows:  ' + str(v.nrows) + '\n')
-        except IOError:
-            print('open h5 file error')
-            messagebox.showerror(title='h5 file', message='open h5 file error')
 
         h5info.config(state='disabled')
 
