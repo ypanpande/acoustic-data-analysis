@@ -115,6 +115,16 @@ class FirstWin:
                                                               title='Select h5 file', filetypes=(('h5 file', '*.h5'), ('all files', '*.*')))
         self.lsource.config(text=self.default_source_file)
 
+    def get_table_list(self):
+        self.table_list = []
+        try:
+            with tb.open_file(self.default_source_file, 'r') as h5file:
+                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
+                    self.table_list.append(v.name)
+        except IOError:
+            print('open h5 file error')
+            messagebox.showerror(title='h5 file', message='open h5 file error')
+
     def h5_info_date(self):
         h5infowin = tk.Toplevel(self.root)
         h5infowin.geometry('250x250+30+30')
@@ -128,16 +138,6 @@ class FirstWin:
         h5info.delete(1.0, 'end')
 
         h5info.config(state='disabled')
-
-    def get_table_list(self):
-        self.table_list = []
-        try:
-            with tb.open_file(self.default_source_file, 'r') as h5file:
-                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
-                    self.table_list.append(v.name)
-        except IOError:
-            print('open h5 file error')
-            messagebox.showerror(title='h5 file', message='open h5 file error')
 
     def choose_date(self):
         if self.dayVar.get() == 1:
