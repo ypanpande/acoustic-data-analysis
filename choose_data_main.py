@@ -115,16 +115,6 @@ class FirstWin:
                                                               title='Select h5 file', filetypes=(('h5 file', '*.h5'), ('all files', '*.*')))
         self.lsource.config(text=self.default_source_file)
 
-    def get_table_list(self):
-        self.table_list = []
-        try:
-            with tb.open_file(self.default_source_file, 'r') as h5file:
-                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
-                    self.table_list.append(v.name)
-        except IOError:
-            print('open h5 file error')
-            messagebox.showerror(title='h5 file', message='open h5 file error')
-
     def h5_info_date(self):
         h5infowin = tk.Toplevel(self.root)
         h5infowin.geometry('250x250+30+30')
@@ -136,8 +126,26 @@ class FirstWin:
 
         h5info.config(state='normal')
         h5info.delete(1.0, 'end')
+        try:
+            with tb.open_file(self.default_source_file, 'r') as h5file:
+                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
+                    h5info.insert('{}.0'.format(k+1), 'Name:  ' +
+                                  v.name+'        '+'Rows:  ' + str(v.nrows) + '\n')
+        except IOError:
+            print('open h5 file error')
+            messagebox.showerror(title='h5 file', message='open h5 file error')
 
         h5info.config(state='disabled')
+
+    def get_table_list(self):
+        self.table_list = []
+        try:
+            with tb.open_file(self.default_source_file, 'r') as h5file:
+                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
+                    self.table_list.append(v.name)
+        except IOError:
+            print('open h5 file error')
+            messagebox.showerror(title='h5 file', message='open h5 file error')
 
     def choose_date(self):
         if self.dayVar.get() == 1:
@@ -147,7 +155,6 @@ class FirstWin:
             self.calchoose2.state(['disabled'])
             self.calget2.state(['disabled'])
             self.cal2.state(['disabled'])
-        elif self.dayVar.get() == 2:
             self.calchoose1.state(['!disabled'])
             self.calget1.state(['!disabled'])
             self.cal1.state(['!disabled'])
@@ -156,6 +163,7 @@ class FirstWin:
             self.cal2.state(['!disabled'])
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
+        elif self.dayVar.get() == 2:
 
     def choose_first_date(self):
         self.bdata.state(['disabled'])
