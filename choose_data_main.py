@@ -163,15 +163,6 @@ class FirstWin:
             self.cal2.state(['!disabled'])
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
-        elif self.dayVar.get() == 2:
-
-    def choose_first_date(self):
-        self.bdata.state(['disabled'])
-        self.combo_list.state(['disabled'])
-
-        datewin = tk.Toplevel(self.root)
-        datewin.title('choose the begin date')
-        Calendar(datewin, self.beginDay)
 
     def get_first_date(self):
         self.first_date = '{}-{:02}-{:02}'.format(
