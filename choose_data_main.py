@@ -187,10 +187,6 @@ class FirstWin:
         if datetime.datetime.strptime(self.end_date, '%Y-%m-%d') < datetime.datetime.strptime(self.first_date, '%Y-%m-%d'):
             messagebox.showerror(
                 title='date info', message='end date should greater than begin date')
-        else:
-            self.cal2.config(text=self.end_date)
-            self.bdata.state(['!disabled'])
-            self.combo_list.state(['!disabled'])
 
     def table_index(self, tt, r=1):
         if tt in self.table_list:
