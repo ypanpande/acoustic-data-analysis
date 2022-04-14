@@ -181,13 +181,6 @@ class FirstWin:
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
 
-    def get_end_date(self):
-        self.end_date = '{}-{:02}-{:02}'.format(
-            self.endDay['year_selected'], self.endDay['month_selected'], self.endDay['day_selected'])
-        if datetime.datetime.strptime(self.end_date, '%Y-%m-%d') < datetime.datetime.strptime(self.first_date, '%Y-%m-%d'):
-            messagebox.showerror(
-                title='date info', message='end date should greater than begin date')
-
     def table_index(self, tt, r=1):
         if tt in self.table_list:
             tt_idx = self.table_list.index(tt)
