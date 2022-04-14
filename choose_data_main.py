@@ -164,6 +164,23 @@ class FirstWin:
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
 
+    def choose_end_date(self):
+        self.bdata.state(['disabled'])
+        self.combo_list.state(['disabled'])
+
+        datewin = tk.Toplevel(self.root)
+        datewin.title('choose the end date')
+        Calendar(datewin, self.endDay)
+
+    def get_first_date(self):
+        self.first_date = '{}-{:02}-{:02}'.format(
+            self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
+        self.cal1.config(text=self.first_date)
+        self.get_table_list()
+        if self.dayVar.get() == 1:
+            self.bdata.state(['!disabled'])
+            self.combo_list.state(['!disabled'])
+
     def get_end_date(self):
         self.end_date = '{}-{:02}-{:02}'.format(
             self.endDay['year_selected'], self.endDay['month_selected'], self.endDay['day_selected'])
