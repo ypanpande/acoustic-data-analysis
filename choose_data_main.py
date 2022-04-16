@@ -181,12 +181,6 @@ class FirstWin:
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
 
-    def get_emerge_table(self, a, b):
-        with tb.open_file(self.default_source_file, 'a') as ff:
-            if '/wnew_table' in ff:
-                aa = ff.root.wnew_table
-                aa.remove()
-
     def table_index(self, tt, r=1):
         if tt in self.table_list:
             tt_idx = self.table_list.index(tt)
@@ -198,13 +192,11 @@ class FirstWin:
 
         return tt_idx
 
-         self.new_table = ff.create_table(
-              '/', 'wnew_table', ptf.Resultnested)
-          for i, t in enumerate(ff.walk_nodes('/', 'Table')):
-               if ((i >= a) & (i <= b)):
-                    t.append_where(dstTable=self.new_table)
-                else:
-                    pass
+    def get_emerge_table(self, a, b):
+        with tb.open_file(self.default_source_file, 'a') as ff:
+            if '/wnew_table' in ff:
+                aa = ff.root.wnew_table
+                aa.remove()
 
     def get_data(self):
         if self.dayVar.get() == 1:
