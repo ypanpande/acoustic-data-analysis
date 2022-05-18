@@ -204,9 +204,7 @@ class FirstWin:
                 self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
             if t1 in self.table_list:
                 t1_idx = self.table_list.index(t1)
-                self.get_emerge_table(t1_idx, t1_idx)
-                self.tttlist = ['table name list', t1]
-                self.combo_list.config(value=self.tttlist)
+
             else:
                 print('there is no data am {}'.format(self.first_date))
                 messagebox.showinfo(
