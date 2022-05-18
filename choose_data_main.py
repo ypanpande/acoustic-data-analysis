@@ -198,17 +198,6 @@ class FirstWin:
                 aa = ff.root.wnew_table
                 aa.remove()
 
-    def get_data(self):
-        if self.dayVar.get() == 1:
-            t1 = 't{}{:02}{:02}'.format(
-                self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
-            if t1 in self.table_list:
-                t1_idx = self.table_list.index(t1)
-
-            else:
-                print('there is no data am {}'.format(self.first_date))
-                messagebox.showinfo(
-                    title='data info', message='there is no data am {}'.format(self.first_date))
         elif self.dayVar.get() == 2:
             t1 = 't{}{:02}{:02}'.format(
                 self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
