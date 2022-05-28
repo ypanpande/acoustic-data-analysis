@@ -209,11 +209,7 @@ class FirstWin:
                 print('Selected date is out of date range in the data file')
                 messagebox.showerror(
                     title='data info', message='Selected date is out of date range in the data file')
-            else:
-                self.get_emerge_table(t1_idx, t2_idx)
-                alist = self.table_list[t1_idx:(t2_idx+1)]
-                self.tttlist = ['table name list'] + alist
-                self.combo_list.config(value=self.tttlist)
+
 
 # =============================================================================
 # menu functions
