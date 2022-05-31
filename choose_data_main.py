@@ -215,6 +215,11 @@ class FirstWin:
 # menu functions
 # =============================================================================
 
+    def loc_sequential6s(self):
+        ls6 = tk.Toplevel(self.root)
+        date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
+                                       self.beginDay['month_selected'], self.beginDay['day_selected'])
+        LocField(ls6, self.default_source_file, 'loc_seq6s', date)
 
     def loc_geiger4s(self):
         lg4 = tk.Toplevel(self.root)
@@ -227,12 +232,6 @@ class FirstWin:
         date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
         LocField(lg6, self.default_source_file, 'loc_geiger6s', date)
-
-    def loc_sequential6s(self):
-        ls6 = tk.Toplevel(self.root)
-        date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
-                                       self.beginDay['month_selected'], self.beginDay['day_selected'])
-        LocField(ls6, self.default_source_file, 'loc_seq6s', date)
 
     def loc_sequential4s(self):
         ls4 = tk.Toplevel(self.root)
