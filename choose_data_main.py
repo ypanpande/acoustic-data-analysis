@@ -246,14 +246,6 @@ class FirstWin:
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
         LocAll(lam, self.default_source_file, date)
 
-    def time_field(self):
-        tf = tk.Toplevel(self.root)
-        TimeField(tf, self.default_source_file, 'timefield')
-
-    def freq_field(self):
-        ff = tk.Toplevel(self.root)
-        FreField(ff, self.default_source_file, 'frefield')
-
     def acceleration(self):
         af = tk.Toplevel(self.root)
         AccField(af, self.default_source_file, 'oda')
