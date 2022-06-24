@@ -57,13 +57,6 @@ class TimeField:
         self.timef = {'maxAmp_t': self.mA_var, 'time_peak': self.tp_var, 'Energy': self.en_var, 'Energy25': self.en25_var,
                       'ZeroCrossf': self.zcf_var, 'rise_time': self.rt_var, 'RA': self.ra_var}
 
-    def init_para_fig(self):
-        self.cfunction = tk.StringVar()
-        self.Function = ['--choose function--', 'show value',
-                         'value histogram', 'statistic boxplot']
-        self.ctable = tk.StringVar()
-        self.cTable = ['--choose data--', 'data table', 'statistic describe']
-
     def init_para_data(self):
         self.mA_var = tk.IntVar()
         self.tp_var = tk.IntVar()
