@@ -78,14 +78,11 @@ class TimeField:
         self.rwidth = ['1', '0.1', '0.2', '0.3',
                        '0.4', '0.5', '0.6', '0.7', '0.8', '0.9']
 
-        self.bmeans = tk.BooleanVar()
-        self.bfliers = tk.BooleanVar()
-        self.means = [True, False]
-        self.fliers = [True, False]
 
 # =============================================================================
 #       init_para     end
 # =============================================================================
+
     def init_gui(self):
         self.init_gui_bar1()
         self.init_gui_bar2()
@@ -228,7 +225,6 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar2
 # =============================================================================
-
 
     def init_gui_bar2(self):
         self.bar2 = ttk.LabelFrame(
