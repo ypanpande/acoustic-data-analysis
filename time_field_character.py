@@ -69,12 +69,6 @@ class TimeField:
         self.plines = tk.StringVar()
         self.plinew = tk.StringVar()
         self.pscale = tk.StringVar()
-        self.color = ['blue', 'green', 'red',
-                      'cyan', 'magenta', 'yellow', 'k-black']
-        self.linestyle = ['-', '--', '-.', ':', 'o', 'v', '^',
-                          '<', '>', '*', 's', 'p', 'h', 'H', '+', 'x', 'D', 'd']
-        self.linewidth = ['0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4']
-        self.axisscale = ['linear', 'log', 'symlog']
 
         self.hbins = tk.IntVar()
         self.hcolor = tk.StringVar()
@@ -234,6 +228,7 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar2
 # =============================================================================
+
 
     def init_gui_bar2(self):
         self.bar2 = ttk.LabelFrame(
