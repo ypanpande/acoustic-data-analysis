@@ -119,21 +119,7 @@ class TimeField:
         self.comfunc.current(0)
         self.comfunc.bind('<<ComboboxSelected>>', self.get_function)
 
-        self.bshow = ttk.Button(
-            self.bar1, text='Show Figures', command=self.show_figures, state='disabled')
-        self.bshow.place(x=265, y=85, width=100, height=25)
 
-        ttk.Label(self.bar1, text='Data Table:').place(
-            x=470, y=85, width=80, height=25)
-        self.comtable = ttk.Combobox(
-            self.bar1, textvariable=self.ctable, value=self.cTable, width=150, state='randonly')
-        self.comtable.place(x=550, y=85, width=120, height=25)
-        self.comtable.current(0)
-        self.comtable.bind('<<ComboboxSelected>>', self.get_table)
-
-        self.bshowT = ttk.Button(
-            self.bar1, text='Show Table', command=self.show_table, state='disabled')
-        self.bshowT.place(x=690, y=85, width=100, height=25)
 # =============================================================================
 #        init_gui  bar3
 # =============================================================================
