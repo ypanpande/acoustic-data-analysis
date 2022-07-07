@@ -103,14 +103,6 @@ class TimeField:
                               command=self.show_figure_number)
         bchannel.place(x=815, y=15, width=60, height=25)
 
-        ttk.Label(self.bar1, text='Choose Parameters:').place(
-            x=5, y=40, width=100, height=25)
-        for m, n in enumerate(sorted(self.timef.keys())):
-            ttk.Checkbutton(self.bar1, text=n, variable=self.timef[n], onvalue=1, offvalue=0,  state='unchecked').place(
-                x=115 + 100*m, y=40, width=95, height=25)
-
-#        ttk.Separator(self.bar1, orient = "horizontal").place(x = 5, y = 70 , width = 900, height = 5)
-
         ttk.Label(self.bar1, text='Choose Function:').place(
             x=5, y=85, width=100, height=25)
         self.comfunc = ttk.Combobox(
