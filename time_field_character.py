@@ -88,6 +88,7 @@ class TimeField:
 #       init_gui  bar1
 # =============================================================================
 
+
     def init_gui_bar1(self):
         self.bar1 = ttk.LabelFrame(self.root, text='Set Parameters Panel',
                                    width=1005, height=155, relief='ridge', borderwidth=1)
@@ -115,6 +116,7 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar3
 # =============================================================================
+
 
     def init_gui_bar3(self):
         self.bar3 = ttk.LabelFrame(
@@ -163,14 +165,6 @@ class TimeField:
         self.chrwidth.current(0)
         self.chrwidth.bind('<<ComboboxSelected>>', self.state_update)
 
-        ttk.Label(self.bar3, text='Showmean:').place(
-            x=310, y=5, width=65, height=23)
-        self.chbins = ttk.Combobox(
-            self.bar3, textvariable=self.bmeans, value=self.means, width=100, state='randonly')
-        self.chbins.place(x=380, y=5, width=70, height=23)
-        self.chbins.current(1)
-        self.chbins.bind('<<ComboboxSelected>>', self.state_update)
-
         ttk.Label(self.bar3, text='Showfliers:').place(
             x=310, y=35, width=65, height=23)
         self.chcolor = ttk.Combobox(
@@ -187,6 +181,7 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar2
 # =============================================================================
+
 
     def init_gui_bar2(self):
         self.bar2 = ttk.LabelFrame(
