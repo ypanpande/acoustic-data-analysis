@@ -186,15 +186,15 @@ class TimeField:
         ttk.Label(self.bar1, text=text).place(
             x=815, y=45, width=170, height=25)
 
-    def init_gui_bar2(self):
-        self.bar2 = ttk.LabelFrame(
-            self.root, text='Figures Panel', width=1540, height=840, relief='sunken', borderwidth=1)
-        self.bar2.place(x=5, y=160, width=1540, height=830)
-
     def figure_number(self):
         cp = self.get_chose_para(self.CH)
         pp = self.get_chose_para(self.timef)
         return {'num': len(cp)*len(pp), 'num_ch': len(cp), 'num_para': len(pp), 'channel': cp, 'para': pp}
+
+    def init_gui_bar2(self):
+        self.bar2 = ttk.LabelFrame(
+            self.root, text='Figures Panel', width=1540, height=840, relief='sunken', borderwidth=1)
+        self.bar2.place(x=5, y=160, width=1540, height=830)
 
     def get_chose_para(self, a):
         return [k for k, v in a.items() if v.get()]
