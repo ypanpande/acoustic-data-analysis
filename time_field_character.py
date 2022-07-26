@@ -88,7 +88,6 @@ class TimeField:
 #       init_gui  bar1
 # =============================================================================
 
-
     def init_gui_bar1(self):
         self.bar1 = ttk.LabelFrame(self.root, text='Set Parameters Panel',
                                    width=1005, height=155, relief='ridge', borderwidth=1)
@@ -116,7 +115,6 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar3
 # =============================================================================
-
 
     def init_gui_bar3(self):
         self.bar3 = ttk.LabelFrame(
@@ -182,17 +180,16 @@ class TimeField:
 #        init_gui  bar2
 # =============================================================================
 
-
-    def init_gui_bar2(self):
-        self.bar2 = ttk.LabelFrame(
-            self.root, text='Figures Panel', width=1540, height=840, relief='sunken', borderwidth=1)
-        self.bar2.place(x=5, y=160, width=1540, height=830)
-
     def show_figure_number(self):
         n = self.figure_number()['num']
         text = 'Number of figures is: {: 4}'.format(n)
         ttk.Label(self.bar1, text=text).place(
             x=815, y=45, width=170, height=25)
+
+    def init_gui_bar2(self):
+        self.bar2 = ttk.LabelFrame(
+            self.root, text='Figures Panel', width=1540, height=840, relief='sunken', borderwidth=1)
+        self.bar2.place(x=5, y=160, width=1540, height=830)
 
     def figure_number(self):
         cp = self.get_chose_para(self.CH)
