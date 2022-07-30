@@ -206,8 +206,7 @@ class TimeField:
             self.cfunction.set('--choose function--')
             self.comfunc.current(0)
         elif not self.figure_number()['num']:
-            messagebox.showerror(title='channel error',
-                                 message='channel is not choosed')
+
             self.cfunction.set('--choose function--')
             self.comfunc.current(0)
         elif self.figure_number()['num'] > 8:
