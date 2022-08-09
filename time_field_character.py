@@ -209,8 +209,6 @@ class TimeField:
 
             self.cfunction.set('--choose function--')
             self.comfunc.current(0)
-        else:
-            self.bshow.config(state='!disabled')
 
     def show_figures(self):
         self.is_frame_free()
