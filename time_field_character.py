@@ -209,11 +209,6 @@ class TimeField:
 
             self.cfunction.set('--choose function--')
             self.comfunc.current(0)
-        elif self.figure_number()['num'] > 8:
-            messagebox.showerror(title='figure number error',
-                                 message='figure number exceeds 8')
-            self.cfunction.set('--choose function--')
-            self.comfunc.current(0)
         else:
             self.bshow.config(state='!disabled')
 
