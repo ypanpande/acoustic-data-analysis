@@ -249,12 +249,7 @@ class TimeField:
                         aa.set_title('{} -- {}'.format(k1, k2))
                         aa.set_xlabel('{} value'.format(k2), fontsize=10)
                         aa.set_ylabel('count', fontsize=10)
-                    elif self.cfunction.get() == self.Function[3]:
-                        aa.boxplot(d, showmeans=self.bmeans.get(
-                        ), meanline=self.bmeans.get(), showfliers=self.bfliers.get())
-                        aa.set_title('{} -- {}'.format(k1, k2))
-#                        aa.set_xlabel('{} value'.format(k2), fontsize = 10)
-                        aa.set_ylabel('{} value'.format(k2), fontsize=10)
+
                     i += 1
         else:
             for k2 in self.figure_number()['para']:
