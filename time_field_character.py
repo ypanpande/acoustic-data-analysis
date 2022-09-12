@@ -286,19 +286,6 @@ class TimeField:
 
                     i += 1
 
-    def embed_figures(self):
-        self.canvas_frame = ttk.Frame(self.bar2)
-#        self.canvas_frame.place(x = 5, y = 160 , width = 1540, height = 780)
-        self.canvas_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-        canvas = FigureCanvasTkAgg(self.af, master=self.canvas_frame)
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
-        self.toolbar_frame = tk.Frame(self.bar2)
-#        self.toolbar_frame.place(x = 5, y = 950 , width = 1540, height = 45)
-        self.toolbar_frame.pack(fill=tk.BOTH, expand=1)
-        toolbar = NavigationToolbar2Tk(canvas, self.toolbar_frame)
-        toolbar.update()
-
     def get_chose_data(self):
         try:
             with tb.open_file(self.path, mode='r') as h5file:
