@@ -88,7 +88,6 @@ class TimeField:
 #       init_gui  bar1
 # =============================================================================
 
-
     def init_gui_bar1(self):
         self.bar1 = ttk.LabelFrame(self.root, text='Set Parameters Panel',
                                    width=1005, height=155, relief='ridge', borderwidth=1)
@@ -116,7 +115,6 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar3
 # =============================================================================
-
 
     def init_gui_bar3(self):
         self.bar3 = ttk.LabelFrame(
@@ -181,7 +179,6 @@ class TimeField:
 # =============================================================================
 #        init_gui  bar2
 # =============================================================================
-
 
     def show_figure_number(self):
         n = self.figure_number()['num']
@@ -352,18 +349,6 @@ class TimeField:
                 if self.isrange:
                     d = d[self.index]
                 df['{}-{}'.format(k1, k2)] = list(d)
-        if self.ctable.get() == self.cTable[1]:
-            pt = Table(f, dataframe=df, showtoolbar=False, showstatusbar=True)
-            pt.show()
-        elif self.ctable.get() == self.cTable[2]:
-            dd = df.describe()
-
-            dd['func'] = dd.index.tolist()
-            cols = dd.columns.tolist()
-            cols = cols[-1:] + cols[:-1]
-            pt = Table(f, dataframe=dd[cols],
-                       showtoolbar=False, showstatusbar=True)
-            pt.show()
 
 
 class FreField(TimeField):
