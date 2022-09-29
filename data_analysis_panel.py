@@ -43,14 +43,6 @@ class CH_s(tb.IsDescription):
         rise_time = tb.FloatCol(pos=4)
         RA = tb.FloatCol(pos=5)
 
-    class frefield(tb.IsDescription):
-        maxAmp_f = tb.FloatCol(pos=0)
-        fre_peak = tb.FloatCol(pos=1)
-        fre_centroid = tb.FloatCol(pos=2)
-        fre_wpeak = tb.FloatCol(pos=3)
-        Power = tb.FloatCol(pos=4)
-        PartialPower = tb.FloatCol(shape=(5), pos=5)
-
 
 class loc_s(tb.IsDescription):
     _v_pos = 1
@@ -564,7 +556,6 @@ class graphpanel:
 #        t = np.arange(-1.0, 1.0, 0.001)
 #        s = t * np.sin(1 / t)
 #        a.plot(t, s)
-
 
     def get_loc_data(self, start_time, end_time, loc_method):
         self.open_h5_file()
