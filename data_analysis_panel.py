@@ -119,14 +119,6 @@ class graphpanel:
 
         }
 
-    def init_gui(self):
-        self.create_top_settings_bar()
-        # self.create_right_settings_bar()
-        self.create_heatmap_bar()
-        self.create_hist_bar()
-        self.create_timefield_bar()
-        self.create_frefield_bar()
-
     def create_top_settings_bar(self):
         topbar_frame = tk.Frame(self.root, height=50,
                                 width=780, relief='ridge', borderwidth=1)
@@ -553,6 +545,7 @@ class graphpanel:
 #        t = np.arange(-1.0, 1.0, 0.001)
 #        s = t * np.sin(1 / t)
 #        a.plot(t, s)
+
 
     def get_loc_data(self, start_time, end_time, loc_method):
         self.open_h5_file()
