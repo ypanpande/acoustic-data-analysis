@@ -116,10 +116,7 @@ class graphpanel:
             'top_loc': [None, None],
             'bottom_loc': [None, None],
             'time_interval': TIME_INTERVAL[0],
-            'timefield': TIMEFIELD_PRAMETERS[0],
-            'hist': 'false',
-            'frefield': FREFIELD_PRAMETERS[0],
-            'channel': CH[0]
+
         }
 
     def init_gui(self):
