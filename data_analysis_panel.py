@@ -129,10 +129,7 @@ class graphpanel:
 
         tk.Label(topbar_frame, text='From', font=("Helvetica", 10),
                  fg='blue').grid(row=4, column=0, rowspan=2, padx=3, pady=5)
-        combo_start_day = ttk.Combobox(
-            topbar_frame, textvariable=self.start_time_day, value=DAY, width=2, state='randonly')
-        combo_start_day.grid(row=4, column=1, rowspan=2, padx=3, pady=5)
-        combo_start_day.current(0)
+
         combo_start_day.bind('<<ComboboxSelected>>',
                              self.start_time_day_changed)
 #        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
