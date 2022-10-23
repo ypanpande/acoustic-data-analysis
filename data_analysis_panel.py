@@ -134,12 +134,6 @@ class graphpanel:
                              self.start_time_day_changed)
 #        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
 #                textvariable=self.start_time_day, command=self.start_time_day_changed).grid(row=4, column=1, rowspan = 2, padx = 3, pady = 5)
-        combo_start_month = ttk.Combobox(
-            topbar_frame, textvariable=self.start_time_month, value=MONTH, width=2, state='randonly')
-        combo_start_month.grid(row=4, column=2, rowspan=2, padx=3, pady=5)
-        combo_start_month.current(0)
-        combo_start_month.bind('<<ComboboxSelected>>',
-                               self.start_time_month_changed)
 
 
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
@@ -542,7 +536,6 @@ class graphpanel:
 #        t = np.arange(-1.0, 1.0, 0.001)
 #        s = t * np.sin(1 / t)
 #        a.plot(t, s)
-
 
     def get_loc_data(self, start_time, end_time, loc_method):
         self.open_h5_file()
