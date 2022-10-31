@@ -157,17 +157,7 @@ class graphpanel:
             topbar_frame, textvariable=self.end_time_day, value=DAY, width=2, state='randonly')
         combo_end_day.grid(row=4, column=7, rowspan=2, padx=3, pady=5)
         combo_end_day.current(0)
-        combo_end_day.bind('<<ComboboxSelected>>', self.end_time_day_changed)
 
-#        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
-#                textvariable=self.end_time_day, command=self.end_time_day_changed).grid(row=4, column=7, rowspan = 2, padx = 3, pady = 5)
-
-        combo_end_month = ttk.Combobox(
-            topbar_frame, textvariable=self.end_time_month, value=MONTH, width=2, state='randonly')
-        combo_end_month.grid(row=4, column=8, rowspan=2, padx=3, pady=5)
-        combo_end_month.current(0)
-        combo_end_month.bind('<<ComboboxSelected>>',
-                             self.end_time_month_changed)
 
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
 #                textvariable=self.end_time_month, command=self.end_time_month_changed).grid(row=4, column=8, rowspan = 2, padx = 3, pady = 5)
