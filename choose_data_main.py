@@ -115,6 +115,16 @@ class FirstWin:
                                                               title='Select h5 file', filetypes=(('h5 file', '*.h5'), ('all files', '*.*')))
         self.lsource.config(text=self.default_source_file)
 
+    def get_table_list(self):
+        self.table_list = []
+        try:
+            with tb.open_file(self.default_source_file, 'r') as h5file:
+                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
+                    self.table_list.append(v.name)
+        except IOError:
+            print('open h5 file error')
+            messagebox.showerror(title='h5 file', message='open h5 file error')
+
     def h5_info_date(self):
         h5infowin = tk.Toplevel(self.root)
         h5infowin.geometry('250x250+30+30')
@@ -126,26 +136,8 @@ class FirstWin:
 
         h5info.config(state='normal')
         h5info.delete(1.0, 'end')
-        try:
-            with tb.open_file(self.default_source_file, 'r') as h5file:
-                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
-                    h5info.insert('{}.0'.format(k+1), 'Name:  ' +
-                                  v.name+'        '+'Rows:  ' + str(v.nrows) + '\n')
-        except IOError:
-            print('open h5 file error')
-            messagebox.showerror(title='h5 file', message='open h5 file error')
 
         h5info.config(state='disabled')
-
-    def get_table_list(self):
-        self.table_list = []
-        try:
-            with tb.open_file(self.default_source_file, 'r') as h5file:
-                for k, v in enumerate(h5file.walk_nodes('/', 'Table')):
-                    self.table_list.append(v.name)
-        except IOError:
-            print('open h5 file error')
-            messagebox.showerror(title='h5 file', message='open h5 file error')
 
     def choose_date(self):
         if self.dayVar.get() == 1:
@@ -155,12 +147,30 @@ class FirstWin:
             self.calchoose2.state(['disabled'])
             self.calget2.state(['disabled'])
             self.cal2.state(['disabled'])
+        elif self.dayVar.get() == 2:
             self.calchoose1.state(['!disabled'])
             self.calget1.state(['!disabled'])
             self.cal1.state(['!disabled'])
             self.calchoose2.state(['!disabled'])
             self.calget2.state(['!disabled'])
             self.cal2.state(['!disabled'])
+            self.bdata.state(['!disabled'])
+            self.combo_list.state(['!disabled'])
+
+    def choose_first_date(self):
+        self.bdata.state(['disabled'])
+        self.combo_list.state(['disabled'])
+
+        datewin = tk.Toplevel(self.root)
+        datewin.title('choose the begin date')
+        Calendar(datewin, self.beginDay)
+
+    def get_first_date(self):
+        self.first_date = '{}-{:02}-{:02}'.format(
+            self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
+        self.cal1.config(text=self.first_date)
+        self.get_table_list()
+        if self.dayVar.get() == 1:
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
 
@@ -172,12 +182,14 @@ class FirstWin:
         datewin.title('choose the end date')
         Calendar(datewin, self.endDay)
 
-    def get_first_date(self):
-        self.first_date = '{}-{:02}-{:02}'.format(
-            self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
-        self.cal1.config(text=self.first_date)
-        self.get_table_list()
-        if self.dayVar.get() == 1:
+    def get_end_date(self):
+        self.end_date = '{}-{:02}-{:02}'.format(
+            self.endDay['year_selected'], self.endDay['month_selected'], self.endDay['day_selected'])
+        if datetime.datetime.strptime(self.end_date, '%Y-%m-%d') < datetime.datetime.strptime(self.first_date, '%Y-%m-%d'):
+            messagebox.showerror(
+                title='date info', message='end date should greater than begin date')
+        else:
+            self.cal2.config(text=self.end_date)
             self.bdata.state(['!disabled'])
             self.combo_list.state(['!disabled'])
 
@@ -198,6 +210,27 @@ class FirstWin:
                 aa = ff.root.wnew_table
                 aa.remove()
 
+            self.new_table = ff.create_table(
+                '/', 'wnew_table', ptf.Resultnested)
+            for i, t in enumerate(ff.walk_nodes('/', 'Table')):
+                if ((i >= a) & (i <= b)):
+                    t.append_where(dstTable=self.new_table)
+                else:
+                    pass
+
+    def get_data(self):
+        if self.dayVar.get() == 1:
+            t1 = 't{}{:02}{:02}'.format(
+                self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
+            if t1 in self.table_list:
+                t1_idx = self.table_list.index(t1)
+                self.get_emerge_table(t1_idx, t1_idx)
+                self.tttlist = ['table name list', t1]
+                self.combo_list.config(value=self.tttlist)
+            else:
+                print('there is no data am {}'.format(self.first_date))
+                messagebox.showinfo(
+                    title='data info', message='there is no data am {}'.format(self.first_date))
         elif self.dayVar.get() == 2:
             t1 = 't{}{:02}{:02}'.format(
                 self.beginDay['year_selected'], self.beginDay['month_selected'], self.beginDay['day_selected'])
@@ -209,18 +242,15 @@ class FirstWin:
                 print('Selected date is out of date range in the data file')
                 messagebox.showerror(
                     title='data info', message='Selected date is out of date range in the data file')
-
+            else:
+                self.get_emerge_table(t1_idx, t2_idx)
+                alist = self.table_list[t1_idx:(t2_idx+1)]
+                self.tttlist = ['table name list'] + alist
+                self.combo_list.config(value=self.tttlist)
 
 # =============================================================================
 # menu functions
 # =============================================================================
-
-
-    def loc_geiger6s(self):
-        lg6 = tk.Toplevel(self.root)
-        date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
-                                       self.beginDay['month_selected'], self.beginDay['day_selected'])
-        LocField(lg6, self.default_source_file, 'loc_geiger6s', date)
 
     def loc_sequential6s(self):
         ls6 = tk.Toplevel(self.root)
@@ -228,11 +258,11 @@ class FirstWin:
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
         LocField(ls6, self.default_source_file, 'loc_seq6s', date)
 
-    def loc_geiger4s(self):
-        lg4 = tk.Toplevel(self.root)
+    def loc_geiger6s(self):
+        lg6 = tk.Toplevel(self.root)
         date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
-        LocField(lg4, self.default_source_file, 'loc_geiger4s', date)
+        LocField(lg6, self.default_source_file, 'loc_geiger6s', date)
 
     def loc_sequential4s(self):
         ls4 = tk.Toplevel(self.root)
@@ -240,11 +270,25 @@ class FirstWin:
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
         LocField(ls4, self.default_source_file, 'loc_seq4s', date)
 
+    def loc_geiger4s(self):
+        lg4 = tk.Toplevel(self.root)
+        date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
+                                       self.beginDay['month_selected'], self.beginDay['day_selected'])
+        LocField(lg4, self.default_source_file, 'loc_geiger4s', date)
+
     def loc_all_methods(self):
         lam = tk.Toplevel(self.root)
         date = '{}-{:02}-{:02}'.format(self.beginDay['year_selected'],
                                        self.beginDay['month_selected'], self.beginDay['day_selected'])
         LocAll(lam, self.default_source_file, date)
+
+    def time_field(self):
+        tf = tk.Toplevel(self.root)
+        TimeField(tf, self.default_source_file, 'timefield')
+
+    def freq_field(self):
+        ff = tk.Toplevel(self.root)
+        FreField(ff, self.default_source_file, 'frefield')
 
     def acceleration(self):
         af = tk.Toplevel(self.root)

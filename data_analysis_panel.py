@@ -43,6 +43,14 @@ class CH_s(tb.IsDescription):
         rise_time = tb.FloatCol(pos=4)
         RA = tb.FloatCol(pos=5)
 
+    class frefield(tb.IsDescription):
+        maxAmp_f = tb.FloatCol(pos=0)
+        fre_peak = tb.FloatCol(pos=1)
+        fre_centroid = tb.FloatCol(pos=2)
+        fre_wpeak = tb.FloatCol(pos=3)
+        Power = tb.FloatCol(pos=4)
+        PartialPower = tb.FloatCol(shape=(5), pos=5)
+
 
 class loc_s(tb.IsDescription):
     _v_pos = 1
@@ -116,8 +124,19 @@ class graphpanel:
             'top_loc': [None, None],
             'bottom_loc': [None, None],
             'time_interval': TIME_INTERVAL[0],
-
+            'timefield': TIMEFIELD_PRAMETERS[0],
+            'hist': 'false',
+            'frefield': FREFIELD_PRAMETERS[0],
+            'channel': CH[0]
         }
+
+    def init_gui(self):
+        self.create_top_settings_bar()
+        # self.create_right_settings_bar()
+        self.create_heatmap_bar()
+        self.create_hist_bar()
+        self.create_timefield_bar()
+        self.create_frefield_bar()
 
     def create_top_settings_bar(self):
         topbar_frame = tk.Frame(self.root, height=50,
@@ -129,11 +148,20 @@ class graphpanel:
 
         tk.Label(topbar_frame, text='From', font=("Helvetica", 10),
                  fg='blue').grid(row=4, column=0, rowspan=2, padx=3, pady=5)
-
+        combo_start_day = ttk.Combobox(
+            topbar_frame, textvariable=self.start_time_day, value=DAY, width=2, state='randonly')
+        combo_start_day.grid(row=4, column=1, rowspan=2, padx=3, pady=5)
+        combo_start_day.current(0)
         combo_start_day.bind('<<ComboboxSelected>>',
                              self.start_time_day_changed)
 #        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
 #                textvariable=self.start_time_day, command=self.start_time_day_changed).grid(row=4, column=1, rowspan = 2, padx = 3, pady = 5)
+        combo_start_month = ttk.Combobox(
+            topbar_frame, textvariable=self.start_time_month, value=MONTH, width=2, state='randonly')
+        combo_start_month.grid(row=4, column=2, rowspan=2, padx=3, pady=5)
+        combo_start_month.current(0)
+        combo_start_month.bind('<<ComboboxSelected>>',
+                               self.start_time_month_changed)
 
 
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
@@ -157,7 +185,17 @@ class graphpanel:
             topbar_frame, textvariable=self.end_time_day, value=DAY, width=2, state='randonly')
         combo_end_day.grid(row=4, column=7, rowspan=2, padx=3, pady=5)
         combo_end_day.current(0)
+        combo_end_day.bind('<<ComboboxSelected>>', self.end_time_day_changed)
 
+#        tk.Spinbox(topbar_frame, from_=1, to=31, width=3,
+#                textvariable=self.end_time_day, command=self.end_time_day_changed).grid(row=4, column=7, rowspan = 2, padx = 3, pady = 5)
+
+        combo_end_month = ttk.Combobox(
+            topbar_frame, textvariable=self.end_time_month, value=MONTH, width=2, state='randonly')
+        combo_end_month.grid(row=4, column=8, rowspan=2, padx=3, pady=5)
+        combo_end_month.current(0)
+        combo_end_month.bind('<<ComboboxSelected>>',
+                             self.end_time_month_changed)
 
 #        tk.Spinbox(topbar_frame, from_=1, to=12, width=3,
 #                textvariable=self.end_time_month, command=self.end_time_month_changed).grid(row=4, column=8, rowspan = 2, padx = 3, pady = 5)
@@ -526,6 +564,7 @@ class graphpanel:
 #        t = np.arange(-1.0, 1.0, 0.001)
 #        s = t * np.sin(1 / t)
 #        a.plot(t, s)
+
 
     def get_loc_data(self, start_time, end_time, loc_method):
         self.open_h5_file()
