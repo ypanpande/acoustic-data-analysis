@@ -173,13 +173,7 @@ class graphpanel:
 #        rightbar_frame = tk.Frame(self.root, height = 50, relief = 'ridge', borderwidth = 1)
 #        rightbar_frame.grid(row = 0, column = 15, rowspan = 10, columnspan=10, 
 #                     sticky= 'n'+'w'+'e'+'s', padx=4, pady=4)
-        ttk.Separator(topbar_frame, orient = 'vertical').grid(row = 0, column = 16, rowspan = 10, sticky = 'ns', padx = 20)
-        tk.Label(topbar_frame, text = 'Select Location Range(mm):', font=("Helvetica", 11), bg = 'peach puff', relief = 'ridge', borderwidth = 1).grid(row = 1, column = 17, columnspan = 5, padx = 2, pady = 5)
-        tk.Label(topbar_frame, text = 'x1', font=("Helvetica", 10), fg = 'blue').grid(row = 4, column = 17, padx = 1, pady = 1)
-        x1_entry = tk.Entry(topbar_frame, textvariable = self.x1, width = 8, validatecommand = self.x1_changed)
-        x1_entry.grid(row = 4, column = 18, padx = 2, pady = 2)
-        x1_entry.bind('<Return>', self.x1_changed)
-        
+
         tk.Label(topbar_frame, text = 'x2', font=("Helvetica", 10), fg = 'blue').grid(row = 5, column = 17, padx = 1, pady = 5)
         x2_entry = tk.Entry(topbar_frame, textvariable = self.x2, width = 8)
         x2_entry.grid(row = 5, column = 18, padx = 2, pady = 5)
