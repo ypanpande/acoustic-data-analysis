@@ -11,9 +11,9 @@ This software is used to display the processed and analysied acoustic emission s
 <div align = "center">
   <img align = "center" width = "600" src = "/assets/image1.jpg">
 <p align = "center">Overview of AES data analyse panel</p> <br>
-  <img align = "center" width = "600" src = "/assets/image1.jpg">
+  <img align = "center" width = "600" src = "/assets/image2.jpg">
 <p align = "center">Overview of data select panel</p> <br>
-  <img align = "center" width = "600" src = "/assets/image1.jpg">
+  <img align = "center" width = "600" src = "/assets/image3.jpg">
 <p align = "center">Overview of data visualization panel</p> <br>
  
 </div>
